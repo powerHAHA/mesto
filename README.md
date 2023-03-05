@@ -8,4 +8,4 @@
 -Popup
 -JavaScript
 
-Ссылка на проект -> 
+Ссылка на проект -> https://powerhaha.github.io/mesto/
