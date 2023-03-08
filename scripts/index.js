@@ -26,8 +26,6 @@ popupCloseButton.addEventListener('click', popupClosed);
 function handleFormSubmit(evt) {
   evt.preventDefault();
   popupClosed();
-  console.log('Форма отправлена');
-
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
 }

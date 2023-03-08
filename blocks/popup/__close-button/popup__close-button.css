@@ -6,11 +6,12 @@
     margin: 0;
     padding: 0;
     position: absolute;
-    right: -8px;
-    top: -8px;
-    transform: translate(100%, -100%);
+    right: -40px;
+    top: -40px;
     transition: opacity 0.2s ease-in-out;
     width: 32px;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   
   .popup__close-button:hover {
@@ -21,8 +22,7 @@
     .popup__close-button {
       height: 20px;
       right: 0;
-      top: -16px;
-      transform: translate(0, -100%);
+      top: -36px;
       width: 20px;
     }
   }
