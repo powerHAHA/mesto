@@ -14,7 +14,7 @@
   padding-bottom: 5px;
 }
 
-.form__input {
+.form__input:focus {
   outline-color: #6391c1;
 }
 
