@@ -15,7 +15,7 @@ const cardContainer = document.querySelector('.cards__list'); //
 const closeButtons = document.querySelectorAll('.popup__close-button'); //
 const imagePopup = document.querySelector('.popup_popup_image'); //
 const pictureImage = imagePopup.querySelector('.popup__picture'); //
-const titleImageText = imagePopup.querySelector('.image__title'); //
+const titleImageText = imagePopup.querySelector('.popup__picture_title'); //
 const cardTemplate = document.querySelector('#card-template').content; //
 
 function closePopup (popup) {
