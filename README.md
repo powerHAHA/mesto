@@ -7,5 +7,6 @@
 -Flexbox
 -Popup
 -JavaScript
-
+-Form validation
+-Close popups by overlay and escape key
 Ссылка на проект -> https://powerhaha.github.io/mesto/
