@@ -57,8 +57,7 @@ setEventListeners = (formElement, { inputSelector, submitButtonSelector, inactiv
 }
 
 const enableValidation = ({ formSelector, ...rest }) => {
-	const formList = Array.from(document.querySelectorAll('.popup__form'));
-
+	const formList = Array.from(document.querySelectorAll(formSelector));
 	formList.forEach((formElement) => {
 		setEventListeners(formElement, rest);
 	});

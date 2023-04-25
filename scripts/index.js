@@ -25,7 +25,7 @@ const initialCards = [
 	}
 ]; 
 
-const popup = document.querySelector('.popup');
+const popup = document.querySelectorAll('.popup');
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__job');
 const buttonEditProfile = document.querySelector('.profile__button-edit');
@@ -50,12 +50,29 @@ const buttonClosePopupSerchCard = popupSerchCard.querySelector('.popup__button-c
 const openPopup = (popup) => {
 	popup.classList.add('popup_opened');
 	document.addEventListener('keydown', closeByEsc);
-	closeByOverlay();
 }
 
 const closePopup = (popup) => {
 	popup.classList.remove('popup_opened');
 	document.removeEventListener('keydown', closeByEsc);
+}
+
+const buttonOff = (popup) => {
+	const buttonSubmit = popup.querySelector('.popup__button-submit');
+	buttonSubmit.classList.add('popup__button-submit_disabled');
+	buttonSubmit.setAttribute('disabled', true);
+}
+
+const deleteError = (popup) => {
+	const inputs = Array.from(popup.querySelectorAll('.popup__input'));
+	const errors = Array.from(popup.querySelectorAll('.popup__input-error'));
+	inputs.forEach((input, error) => {
+		input.classList.remove('popup__input_text_error');
+	});
+	errors.forEach((error) => {
+		error.classList.remove('popup__input-error_visible');
+		error.textContent = '';
+	})
 }
 
 const closeByEsc = (evt) => {
@@ -64,19 +81,18 @@ const closeByEsc = (evt) => {
 	}
 }
 
-const closeByOverlay = () => {
-	const popups = Array.from(document.querySelectorAll('.popup'));
-	popups.forEach((popupElement) => {
-		popupElement.addEventListener('click', function (evt) {
-			if (evt.target.classList.contains('popup')) {
-				evt.target.classList.remove('popup_opened');
-			}
-		})
-	})
-}
+popup.forEach((popup) => {
+	popup.addEventListener('click', (event) => {
+	  if (event.target === event.currentTarget) {
+		closePopup(popup);
+	  };
+	});
+  });
 
 const handleEditProfileClick = () => {
 	openPopup(popupProfile);
+	buttonOff(popupProfile);
+	deleteError(popupProfile);
 	nameInput.value = nameProfile.textContent;
 	jobInput.value = jobProfile.textContent;
 }
@@ -97,6 +113,7 @@ formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 
 buttonAddNewCard.addEventListener('click', () => {
 	openPopup(popupNewCard);
+	buttonOff(popupNewCard);
 });
 buttonClosePopupNewCard.addEventListener('click', () => {
 	closePopup(popupNewCard);
