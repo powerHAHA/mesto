@@ -25,7 +25,7 @@ const initialCards = [
 	}
 ]; 
 
-const popup = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__job');
 const buttonEditProfile = document.querySelector('.profile__button-edit');
@@ -81,7 +81,7 @@ const closeByEsc = (evt) => {
 	}
 }
 
-popup.forEach((popup) => {
+popups.forEach((popup) => {
 	popup.addEventListener('click', (event) => {
 	  if (event.target === event.currentTarget) {
 		closePopup(popup);
