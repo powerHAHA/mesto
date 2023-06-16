@@ -1,8 +1,12 @@
 export class UserInfo {
 	constructor({ userNameSelector, userDescriptionSelector }) {
-		this._userName = userNameSelector;
-		this._userDescription = userDescriptionSelector;
-	}
+		this.setElementReferences({ userNameSelector, userDescriptionSelector });
+  }
+
+  setElementReferences({ userNameSelector, userDescriptionSelector }) {
+    this._userName = document.querySelector(userNameSelector);
+    this._userDescription = document.querySelector(userDescriptionSelector);
+  }
 
 	getUserInfo() {
 		const userInfo = {
