@@ -9,4 +9,6 @@
 -JavaScript
 -Form validation
 -Close popups by overlay and escape key
+-ООП
+-webpack
 Ссылка на проект -> https://powerhaha.github.io/mesto/
