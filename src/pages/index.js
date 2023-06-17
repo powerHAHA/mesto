@@ -90,7 +90,7 @@ buttonEditProfile.addEventListener('click', () => {
 buttonAddNewCard.addEventListener('click', () => {
 	popupAddCard.open();
 	cardValidator.deleteErrors();
-	Card._handleLike();
+	cardValidator.toggleButtonState();
 })
 
 popupEditProfile.setEventListeners();
