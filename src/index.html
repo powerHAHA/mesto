@@ -14,7 +14,7 @@
 	<main class="content">
 		<section class="profile page__profile">
 			<div class="profile__info">
-				<div class="profile__avatar-container"></div>
+				<div class="profile__avatar-container">
 					<img src="<%=require('./images/Avatar.jpg')%>" alt="Аватар" class="profile__avatar">
 					<button class=" button profile__button-avatar" type="button" aria-label="Изменить аватар"></button>
 				</div>
@@ -27,16 +27,15 @@
 				</div>
 			</div>
 			<button class="profile__button-add button" type="button"></button>
-			</section>
+		</section>
 			<section class="elements page__elements">
 				<ul class="elements__items">
 				</ul>
 			</section>
-		</main>
+	</main>
 		<footer class="footer page__footer">
 			<p class="footer__copyright">&copy; 2023 Mesto Russia</p>
 		</footer>
-	</div>
 	<div class="popup popup_type_edit">
 		<div class="popup__container">
 			<button class="popup__button-close button" type="button"></button>
@@ -91,7 +90,6 @@
 			<button class="popup__button-close button" aria-label="Закрыть" type="button"></button>
 			<h3 class="popup__title popup__title_type_delete-card">Вы уверены?</h3>
 			<button class="popup__button-submit button" type="submit" aria-label="Удаление карточки">Да</button>
-			</form>
 		</div>
 	</div>
 	
