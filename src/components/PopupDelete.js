@@ -1,5 +1,4 @@
 import { Popup } from "./Popup";
-
 export class PopupDelete extends Popup {
 	constructor({ popupElement, cardDelete }) {
 		super(popupElement);

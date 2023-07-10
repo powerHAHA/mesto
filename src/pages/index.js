@@ -8,6 +8,7 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import {
+	initialCards, 
 	validationConfig, 
 	formElementProfile, 
 	formElementNewCard, 
