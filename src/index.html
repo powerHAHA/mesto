@@ -16,7 +16,7 @@
 				<div class="profile__info">
 					<div class="profile__avatar-container">
 						<img src="<%=require('./images/Avatar.jpg')%>" alt="Аватар" class="profile__avatar">
-						<button class="profile__button-avatar button__noborder button" type="button" aria-label="Изменить аватар"></button>
+						<button class="profile__button-avatar button border" type="button" aria-label="Изменить аватар"></button>
 					</div>
 					<div class="profile__description">
 						<div class="profile__container">
@@ -40,7 +40,7 @@
 
 	<div class="popup popup_type_new-card">
 		<div class="popup__container">
-			<button class="popup__button-close button button__noborder" type="button" aria-label="Закрыть"></button>
+			<button class="popup__button-close button border" type="button" aria-label="Закрыть"></button>
 			<form name="addCards" class="popup__form" novalidate>
 				<h3 class="popup__title">Новое место</h3>
 				<input id="input-title" name="imageName" class="popup__input popup__input_type_title" type="text" placeholder="Название" required minlength="2" maxlength="30">
@@ -99,11 +99,11 @@
 	<template id="cards-element">
 		<li class="element">
 			<img src="#" alt="#" class="element__image">
-			<button class="element__button-delete button button__noborder" type="button" aria-label="Удалить карточку"></button>
+			<button class="element__button-delete button border" type="button" aria-label="Удалить карточку"></button>
 			<div class="element__description">
 				<h2 class="element__title"></h2>
 				<div class="element__container-likes">
-					<button class="element__button-like button button__noborder" type="button" aria-label="Лайкнуть карточку"></button>
+					<button class="element__button-like button border" type="button" aria-label="Лайкнуть карточку"></button>
 					<p class="element__like-counter">0</p>
 				</div>
 			</div>
