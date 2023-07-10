@@ -4,7 +4,6 @@ export class PopupDelete extends Popup {
 	constructor({ popupElement, cardDelete }) {
 		super(popupElement);
 		this._cardDelete = cardDelete;
-
 		this._buttonConfirmDelete = this._popup.querySelector('.popup__button-submit');
 	}
 
@@ -15,11 +14,8 @@ export class PopupDelete extends Popup {
 
 	setEventListeners() {
 		super.setEventListeners();
-
 		this._buttonConfirmDelete.addEventListener('click', () => {
-			this._cardDelete(this._card._cardId);
-			this._card.removeCard();
-			this.close();
+			this._cardDelete(this._card, this._card._cardId);
 		})
 	}
 

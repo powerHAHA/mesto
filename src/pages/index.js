@@ -8,7 +8,6 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import {
-	initialCards, 
 	validationConfig, 
 	formElementProfile, 
 	formElementNewCard, 
@@ -45,8 +44,12 @@ api.getCards().then((cards) => {
 
 const popupDeleteCard = new PopupDelete({
 	popupElement: popupDelete,
-	cardDelete: (cardId) => {
+	cardDelete: (card, cardId) => {
 		api.deleteCard(cardId)
+			.then(() => {
+				card.removeCard();
+				popupDeleteCard.close();
+			}).catch((err) => console.log(`При удалении карточки возникла ошибка: ${err}`))
 	}
 })
 
@@ -56,6 +59,7 @@ Promise.all([api.getCards(), api.getUserData()]).then(([cardsArray, userProfileI
 	userId = userProfileInfo._id;
 	userInfo.setUserInfo({ userName: userProfileInfo.name, userDescription: userProfileInfo.about });
 	userInfo.setUserAvatar({ imageAvatar: userProfileInfo.avatar });
+	cardsList.renderItems(cardsArray);
 }).catch((err) => console.log(`Возникла ошибка: ${err}`))
 
 
