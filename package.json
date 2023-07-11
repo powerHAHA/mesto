@@ -1,7 +1,7 @@
 {
 	"name": "mesto",
 	"version": "1.0.0",
-	"description": "Проект Mesto",
+	"description": "Проект представляет собой этап начала изучения JavaScript'а. В конечном счёт проект будет похож на сервис Mesto, представляющий собой интерактивную страницу, куда можно добавлять фотографии, удалять их и ставить лайки.",
 	"main": "index.js",
 	"scripts": {
 		"build": "webpack --mode production",
@@ -18,9 +18,9 @@
 		"babel-loader": "^9.1.2",
 		"clean-webpack-plugin": "^4.0.0",
 		"css-loader": "^6.8.1",
+		"html-loader": "^4.2.0",
 		"cssnano": "^6.0.1",
 		"gh-pages": "^5.0.0",
-		"html-loader": "^4.2.0",
 		"html-webpack-plugin": "^5.5.1",
 		"mini-css-extract-plugin": "^2.7.6",
 		"postcss-loader": "^7.3.3",
