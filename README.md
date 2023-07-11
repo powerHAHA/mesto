@@ -11,4 +11,5 @@
 -Close popups by overlay and escape key
 -ООП
 -webpack
+-Connection to server
 Ссылка на проект -> https://powerhaha.github.io/mesto/

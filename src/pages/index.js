@@ -4,27 +4,27 @@ import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithForm } from '../components/PopupWithForm';
 import { UserInfo } from '../components/UserInfo';
 import { PopupWithImage } from '../components/PopupWithImage';
-import { PopupDelete } from '../components/PopupDelete';
+import { PopupWithDelete } from '../components/PopupWithDelete';
 import { Section } from '../components/Section';
 import { Api } from '../components/Api';
 import {
-	validationConfig, 
-	formElementProfile, 
-	formElementNewCard, 
-	formElementAvatar, 
-	cardList, 
-	popupProfile, 
-	popupNewCard, 
-	popupAvatar, 
-	popupSerchCard, 
-	buttonEditProfile, 
-	buttonAddNewCard, 
-	buttonEditAvatar, 
+	validationConfig,
+	formElementProfile,
+	formElementNewCard,
+	formElementAvatar,
+	cardList,
+	popupProfile,
+	popupNewCard,
+	popupAvatar,
+	popupSerchCard,
+	buttonEditProfile,
+	buttonAddNewCard,
+	buttonEditAvatar,
 	nameProfile,
-	jobProfile, 
+	jobProfile,
 	avatarProfile,
 	nameInput,
-	jobInput,
+	jobInput, 
 	avatarInput,
 	popupDelete,
 
@@ -89,7 +89,7 @@ const cardsList = new Section({
 
 const popupSerchImage = new PopupWithImage(popupSerchCard);
 
-const popupDeleteCard = new PopupDelete({
+const popupDeleteCard = new PopupWithDelete({
 	popupElement: popupDelete,
 	cardDelete: (card, cardId) => {
 		api.deleteCard(cardId)
@@ -165,10 +165,10 @@ buttonEditAvatar.addEventListener('click', () => {
 	avatarValidator.deleteErrors();
 })
 
-popupEditAvatar.setEventListeners();
-popupSerchImage.setEventListeners();
 popupEditProfile.setEventListeners();
 popupAddCard.setEventListeners();
+popupEditAvatar.setEventListeners();
+popupSerchImage.setEventListeners();
 popupDeleteCard.setEventListeners();
 
 const profileValidator = new FormValidator(validationConfig, formElementProfile);
