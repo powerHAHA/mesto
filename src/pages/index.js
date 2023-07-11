@@ -1,33 +1,33 @@
 import '../pages/index.css';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { PopupDelete } from '../components/PopupDelete.js';
-import { Api } from '../components/Api.js';
-import { UserInfo } from '../components/UserInfo.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm';
+import { UserInfo } from '../components/UserInfo';
+import { PopupWithImage } from '../components/PopupWithImage';
+import { PopupDelete } from '../components/PopupDelete';
+import { Section } from '../components/Section';
+import { Api } from '../components/Api';
 import {
-	initialCards, 
 	validationConfig, 
 	formElementProfile, 
 	formElementNewCard, 
-	formElementAvatar,
+	formElementAvatar, 
 	cardList, 
 	popupProfile, 
-	popupNewCard,
+	popupNewCard, 
+	popupAvatar, 
 	popupSerchCard, 
-	popupAvatar,
 	buttonEditProfile, 
-	buttonEditAvatar,
 	buttonAddNewCard, 
-	avatarProfile,
-	nameProfile, 
+	buttonEditAvatar, 
+	nameProfile,
 	jobProfile, 
-	nameInput, 
-	jobInput, 
+	avatarProfile,
+	nameInput,
+	jobInput,
 	avatarInput,
-	popupDelete
+	popupDelete,
+
 } from '../utils/constants.js';
 
 const api = new Api({
@@ -38,23 +38,13 @@ const api = new Api({
 	}
 })
 
-
-api.getCards().then((cards) => {
-	cardsList.renderItems(cards);
-}).catch((err) => console.log(`При загрузке карточек с сервера возникла ошибка: ${err}`));
-
-const popupDeleteCard = new PopupDelete({
-	popupElement: popupDelete,
-	cardDelete: (card, cardId) => {
-		api.deleteCard(cardId)
-			.then(() => {
-				card.removeCard();
-				popupDeleteCard.close();
-			}).catch((err) => console.log(`При удалении карточки возникла ошибка: ${err}`))
-	}
-})
-
 let userId;
+
+const userInfo = new UserInfo({
+	userNameSelector: nameProfile,
+	userDescriptionSelector: jobProfile,
+	userAvatarSelector: avatarProfile
+})
 
 Promise.all([api.getCards(), api.getUserData()]).then(([cardsArray, userProfileInfo]) => {
 	userId = userProfileInfo._id;
@@ -62,7 +52,6 @@ Promise.all([api.getCards(), api.getUserData()]).then(([cardsArray, userProfileI
 	userInfo.setUserAvatar({ imageAvatar: userProfileInfo.avatar });
 	cardsList.renderItems(cardsArray);
 }).catch((err) => console.log(`Возникла ошибка: ${err}`))
-
 
 const createCard = (cardItem) => {
 	const card = new Card({
@@ -86,7 +75,8 @@ const createCard = (cardItem) => {
 				}).catch((err) => console.log(`При удаление лайка возникла ошибка: ${err}`));
 		},
 	},
-		userId, '#cards-element')
+		userId,
+		'#cards-element')
 	return card.generateCard();
 }
 
@@ -94,19 +84,24 @@ const cardsList = new Section({
 	renderer: (cardItem) => {
 		cardsList.addItem(createCard(cardItem));
 	}
-}, cardList);
+},
+	cardList);
 
 const popupSerchImage = new PopupWithImage(popupSerchCard);
 
-const userInfo = new UserInfo({
-	userNameSelector: nameProfile,
-	userDescriptionSelector: jobProfile,
-	userAvatarSelector: avatarProfile
+const popupDeleteCard = new PopupDelete({
+	popupElement: popupDelete,
+	cardDelete: (card, cardId) => {
+		api.deleteCard(cardId)
+			.then(() => {
+				card.removeCard();
+				popupDeleteCard.close();
+			}).catch((err) => console.log(`При удалении карточки возникла ошибка: ${err}`))
+	}
 })
 
 const popupEditProfile = new PopupWithForm({
 	popupElement: popupProfile,
-	inputSelector:'.popup__input',
 	handleFormSubmit: (data) => {
 		popupEditProfile.renderLoading(true);
 		api.sendUserData(data)
@@ -121,9 +116,23 @@ const popupEditProfile = new PopupWithForm({
 	}
 })
 
+const popupEditAvatar = new PopupWithForm({
+	popupElement: popupAvatar,
+	handleFormSubmit: (data) => {
+		popupEditAvatar.renderLoading(true);
+		api.sendAvatarData(data)
+			.then((res) => {
+				userInfo.setUserAvatar({
+					imageAvatar: res.avatar,
+				});
+				popupEditAvatar.close();
+			}).catch((err) => console.log(`При смене аватара возникла ошибка: ${err}`))
+			.finally(() => { popupEditAvatar.renderLoading(false); })
+	}
+})
+
 const popupAddCard = new PopupWithForm({
 	popupElement: popupNewCard,
-	inputSelector:'.popup__input',
 	handleFormSubmit: (data) => {
 		popupAddCard.renderLoading(true);
 		api.addNewCard({ name: data.imageName, link: data.imageLink })
@@ -135,23 +144,9 @@ const popupAddCard = new PopupWithForm({
 	}
 })
 
-const popupEditAvatar = new PopupWithForm({
-	popupElement: popupAvatar,
-	handleFormSubmit: (data) => {
-		popupEditAvatar.renderLoading(true);
-		api.sendAvatarData(data)
-			.then((res) => {
-				userInfo.setUserAvatar({
-					imageAvatar: res.avatar,
-				});
-				popupEditAvatar.close();
-			}).catch((err) => console.log(`При редактировании аватара возникла ошибка: ${err}`))
-			.finally(() => { popupEditAvatar.renderLoading(false); })
-	}
-})
-
 buttonEditProfile.addEventListener('click', () => {
 	popupEditProfile.open();
+	profileValidator.toggleButtonState();
 	profileValidator.deleteErrors();
 	const user = userInfo.getUserInfo();
 	nameInput.value = user.name;
@@ -160,8 +155,8 @@ buttonEditProfile.addEventListener('click', () => {
 
 buttonAddNewCard.addEventListener('click', () => {
 	popupAddCard.open();
-	cardValidator.deleteErrors();
 	cardValidator.toggleButtonState();
+	cardValidator.deleteErrors();
 })
 
 buttonEditAvatar.addEventListener('click', () => {
@@ -170,16 +165,16 @@ buttonEditAvatar.addEventListener('click', () => {
 	avatarValidator.deleteErrors();
 })
 
+popupEditAvatar.setEventListeners();
+popupSerchImage.setEventListeners();
+popupEditProfile.setEventListeners();
+popupAddCard.setEventListeners();
+popupDeleteCard.setEventListeners();
+
 const profileValidator = new FormValidator(validationConfig, formElementProfile);
 const cardValidator = new FormValidator(validationConfig, formElementNewCard);
 const avatarValidator = new FormValidator(validationConfig, formElementAvatar);
 
-popupEditProfile.setEventListeners();
-popupEditAvatar.setEventListeners();
-popupAddCard.setEventListeners();
-popupSerchImage.setEventListeners();
-popupDeleteCard.setEventListeners();
+profileValidator.enableValidation();
 cardValidator.enableValidation();
 avatarValidator.enableValidation();
-profileValidator.enableValidation();
-profileValidator.toggleButtonState();

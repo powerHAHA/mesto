@@ -17,5 +17,4 @@ export class PopupDelete extends Popup {
 			this._cardDelete(this._card, this._card._cardId);
 		})
 	}
-
 }

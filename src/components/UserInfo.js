@@ -5,17 +5,11 @@ export class UserInfo {
 		this._userAvatar = userAvatarSelector;
 	}
 
-  setElementReferences({ userNameSelector, userDescriptionSelector }) {
-    this._userName = document.querySelector(userNameSelector);
-    this._userDescription = document.querySelector(userDescriptionSelector);
-  }
-
 	getUserInfo() {
 		const userInfo = {
 			name: this._userName.textContent,
 			description: this._userDescription.textContent
 		}
-
 		return (userInfo);
 	}
 

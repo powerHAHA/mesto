@@ -13,6 +13,12 @@ export class FormValidator {
 		this._setEventListeners();
 	}
 
+	deleteErrors() {
+		this._inputList.forEach((inputElement) => {
+			this._hideInputError(inputElement);
+		})
+	};
+
 	_setEventListeners() {
 		this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
 		this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
@@ -24,13 +30,7 @@ export class FormValidator {
 			});
 		});
 	}
-
-	deleteErrors() {
-		this._inputList.forEach((inputElement) => {
-			this._hideInputError(inputElement);
-		})
-	};
-
+	
 	toggleButtonState() {
 		if (this._hasInvalidInput()) {
 			this._buttonElement.classList.add(this._inactiveButtonClass);

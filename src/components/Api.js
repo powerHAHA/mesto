@@ -11,7 +11,7 @@ export class Api {
 			.then(this._handleResponse)
 	}
 
-    sendUserData(userData) {
+	sendUserData(userData) {
 		return fetch(`${this._url}/users/me`, {
 			method: 'PATCH',
 			headers: this._headers,
@@ -23,7 +23,7 @@ export class Api {
 			.then(this._handleResponse)
 	}
 
-    sendAvatarData(userAvatar) {
+	sendAvatarData(userAvatar) {
 		return fetch(`${this._url}/users/me/avatar`, {
 			method: 'PATCH',
 			headers: this._headers,
@@ -50,7 +50,15 @@ export class Api {
 			.then(this._handleResponse)
 	}
 
-    putLike(cardId) {
+	deleteCard(cardId) {
+		return fetch(`${this._url}/cards/${cardId}`, {
+			method: 'DELETE',
+			headers: this._headers,
+		})
+			.then(this._handleResponse)
+	}
+
+	putLike(cardId) {
 		return fetch(`${this._url}/cards/${cardId}/likes`, {
 			method: 'PUT',
 			headers: this._headers,
@@ -60,13 +68,6 @@ export class Api {
 
 	deleteLike(cardId) {
 		return fetch(`${this._url}/cards/${cardId}/likes`, {
-			method: 'DELETE',
-			headers: this._headers,
-		})
-			.then(this._handleResponse)
-	}
-	deleteCard(cardId) {
-		return fetch(`${this._url}/cards/${cardId}`, {
 			method: 'DELETE',
 			headers: this._headers,
 		})
